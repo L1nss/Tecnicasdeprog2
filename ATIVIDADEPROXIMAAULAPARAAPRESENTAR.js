@@ -1,7 +1,7 @@
 class usuario {
-  nome = this.nome;
-  #email = this.#email;
-  #senha = this.#senha;
+  #email;
+  #senha;
+
   constructor(nome, email, senha) {
     this.nome = nome;
     this.#email = email;
@@ -11,12 +11,23 @@ class usuario {
     return this.#email;
   }
 
+  set email(novoEmail) {
+    this.#email = novoEmail;
+  }
   autenticar(senha) {
     return senha === this.#senha;
   }
+  set senha(novaSenha) {
+    if (novaSenha.length >= 8) {
+      this.#senha = novaSenha;
+    } else {
+      console.log("A senha deve ter pelo menos 8 caracteres.");
+    }
+  }
+  info() {
+    return `Nome: ${this.nome}, Email: ${this.#email}`;
+  }
 }
-
-const user1 = new usuario("João", "joao@example.com", "123456");
-console.log(user1.nome);
-console.log(user1.email);
-console.log(user1.autenticar("123456"));
+const user1 = new usuario("João", "joao@egmail.com", "12345678");
+console.log(user1.autenticar("12345678"));
+console.log(user1.info());
